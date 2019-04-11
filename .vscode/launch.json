@@ -10,7 +10,7 @@
             "type": "node",
             "request": "launch",
             "name": "Setup Test",
-            "program": "${workspaceFolder}/test/unit/handlers/participants.test.js",
+            "program": "${workspaceFolder}/test/unit/seeds/configuration.test.js",
             "outputCapture": "std"
         }
     ]

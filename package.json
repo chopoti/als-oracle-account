@@ -39,8 +39,15 @@
         "tape": "4.6.2",
         "tapes": "4.1.0"
     },
+    "standard": {
+        "ignore": [
+            "/migrations/**"
+        ]
+    },
     "scripts": {
         "start": "node ./src/server",
+        "pretest": "standard",
+        "standard": "standard",
         "test": "tape 'test/**/*.js'",
         "test:unit": "tape 'test/unit/**/*.js'",
         "test:xunit": "tape 'test/unit/**/*.js' | tap-xunit",
