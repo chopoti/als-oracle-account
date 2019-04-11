@@ -4,11 +4,10 @@ const participants = require('../../../domain/participants/index')
 require('dotenv').config();
 const Boom = require('boom');
 const Joi = require('joi');
+const Config = require('../../../../config/default.json')
  const TYPE_REGEX = new RegExp(process.env.TYPE_REGEX, "i");
 const IDENTIFIER_REGEX = new RegExp(process.env.IDENTIFIER_REGEX, "i");
 const SUPPORTED_CURRENCY_REGEX = new RegExp(process.env.SUPPORTED_CURRENCY_REGEX, "i");
-
-//console.log('type rg', TYPE_REGEX)
 
 /**
  * Operations on /participants/{Type}/{ID}
@@ -27,7 +26,7 @@ module.exports = {
 
     const identifierSchema = Joi.object().keys({
       Type: Joi.string().regex(TYPE_REGEX).required(),
-      ID: Joi.string().regex(IDENTIFIER_REGEX).length(14).required()
+      ID: Joi.string().regex(IDENTIFIER_REGEX).length(Config.IDENTIFIER.IDENTIFIER_SIZE).required()
     });
 
     var response = null;
@@ -39,7 +38,7 @@ module.exports = {
           response = err.message;
         } else {
           var accountNumber = value.ID;
-          var bankCode = accountNumber.substring(0, 3);
+          var bankCode = accountNumber.substring(0, Config.IDENTIFIER.BANK_IDENTIFIER);
           response = participants.getByParticipantId(bankCode)
         }
       }
@@ -57,7 +56,7 @@ module.exports = {
 
     const participantSchema = Joi.object().keys({
       CURRENCY: Joi.string().regex(SUPPORTED_CURRENCY_REGEX).required(),
-      FSPID: Joi.string().regex(IDENTIFIER_REGEX).length(3).required(),
+      FSPID: Joi.string().regex(IDENTIFIER_REGEX).length(Config.IDENTIFIER.BANK_IDENTIFIER).required(),
     });
     var response = null;
 
@@ -108,7 +107,7 @@ module.exports = {
 
     const participantSchema = Joi.object().keys({
       CURRENCY: Joi.string().regex(SUPPORTED_CURRENCY_REGEX).required(),
-      FSPID: Joi.string().regex(IDENTIFIER_REGEX).length(3).required()
+      FSPID: Joi.string().regex(IDENTIFIER_REGEX).length(Config.IDENTIFIER.BANK_IDENTIFIER).required()
     });
     var response = null;
     Joi.validate(
@@ -137,7 +136,7 @@ module.exports = {
     // const IDENTIFIER_REGEX = new RegExp(configuration[2].value);
     const fspId = request.params.ID;
     const participantSchema = Joi.object().keys({
-      FSPID: Joi.string().regex(IDENTIFIER_REGEX).length(3).required()
+      FSPID: Joi.string().regex(IDENTIFIER_REGEX).length(Config.IDENTIFIER.BANK_IDENTIFIER).required()
     });
     var response = null;
     try {

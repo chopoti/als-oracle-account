@@ -3,7 +3,7 @@
 const configs = [
   {
     'key': 'TYPE_REGEX',
-    'value': '^bankAccount$'
+    'value': '^ACCOUNT_ID$'
   },
   {
     'key': 'SUPPORTED_CURRENCY_REGEX',
@@ -21,7 +21,7 @@ const seed = async function (knex) {
   } catch (err) {
     if (err.code === 'ER_DUP_ENTRY') return -1001
     else {
-      console.log(`Uploading seeds for currency has failed with the following error: ${err}`)
+      console.log(`Uploading seeds for configuration has failed with the following error: ${err}`)
       return -1000
     }
   }
