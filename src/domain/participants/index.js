@@ -3,7 +3,7 @@
 
 
 const ParticipantsModel = require('../../models/participants/index')
-const ConfigurationModel = require('../../models/configuration')
+//const ConfigurationModel = require('../../models/configuration')
 
 module.exports = {
     getByParticipantId: async function (bankCode) {
@@ -44,6 +44,7 @@ module.exports = {
         if( participant === 1) return 'Ok'
         if( participant != 1) return 'Error'
     }, getConfiguration: async function(){
-        return await ConfigurationModel.getConfiguration()
+        return await ParticipantsModel.getConfiguration()
+       
     }
 }
