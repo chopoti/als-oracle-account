@@ -153,6 +153,7 @@ Test('ParticipantService', async (ParticipantServiceTest) => {
           }
           const fspId = '111'
 
+
      ParticipantsModel.deleteParticipant = sandbox.stub().returns('ok')
     
 
